@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FoodBonus{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="header">
+    <a class="logo" href="/">FoodBonus</a>
+
+    <nav class="navigation">
+        <a href="/">Меню</a>
+
+        {% if user.is_authenticated %}
+            <span>Пользователь: {{ user.username }}</span>
+            <span>Бонусы: {{ user.bonus_balance }}</span>
+            <a href="/orders/">Мои заказы</a>
+            <a class="button button-secondary" href="/logout/">Выйти</a>
+        {% else %}
+            <a class="button" href="/login/">Войти</a>
+        {% endif %}
+    </nav>
+</header>
+
+<main class="container">
+    {% block content %}
+    {% endblock %}
+</main>
+
+</body>
+</html>
