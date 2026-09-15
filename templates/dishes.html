@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Меню — FoodBonus{% endblock %}
+
+{% block content %}
+
+<h1>Меню</h1>
+
+<div class="dish-list">
+    {% for dish in dishes %}
+        <article class="dish-card">
+            <img
+                class="dish-image"
+                src="{{ dish.image.url }}"
+                alt="{{ dish.name }}">
+
+            <div class="dish-content">
+                <h2>{{ dish.name }}</h2>
+
+                <p class="price">
+                    Стоимость: {{ dish.price }} ₽
+                </p>
+
+                <a
+                    class="button"
+                    href="/orders/create/?dish={{ dish.id }}">
+                    Заказать
+                </a>
+            </div>
+        </article>
+    {% empty %}
+        <p>Блюд пока нет.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
