@@ -16,3 +16,20 @@ class Dish(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Order(models.Model):
+    client = models.ForeignKey(
+        Client,
+        on_delete=models.CASCADE,
+        related_name="orders",
+    )
+    dish = models.ForeignKey(
+        Dish,
+        on_delete=models.CASCADE,
+        related_name="orders",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.client.username} — {self.dish.name}"
