@@ -12,7 +12,7 @@ class OrderForm(forms.Form):
 
     use_bonuses = forms.BooleanField(
         required=False,
-        label="Использовать бонусы",
+        label="Списать бонусы",
     )
 
 

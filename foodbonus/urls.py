@@ -17,6 +17,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     path("", dishes, name="home"),
+    path("dishes/", dishes, name="dishes"),
 
     path("register/", register, name="register"),
 
