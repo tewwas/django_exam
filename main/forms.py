@@ -10,6 +10,11 @@ class OrderForm(forms.Form):
         label="Блюдо",
     )
 
+    use_bonuses = forms.BooleanField(
+        required=False,
+        label="Использовать бонусы",
+    )
+
 
 class ClientCreationForm(UserCreationForm):
     class Meta:

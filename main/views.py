@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
@@ -31,10 +33,20 @@ def create_order(request):
         form = OrderForm(request.POST)
 
         if form.is_valid():
+            dish = form.cleaned_data["dish"]
+            use_bonuses = form.cleaned_data["use_bonuses"]
+
+            if use_bonuses:
+                request.user.bonus_balance = 0
+
             Order.objects.create(
                 client=request.user,
-                dish=form.cleaned_data["dish"],
+                dish=dish,
             )
+
+            bonus = int(dish.price * Decimal("0.05"))
+            request.user.bonus_balance += bonus
+            request.user.save(update_fields=["bonus_balance"])
 
             return redirect("home")
     else:
